@@ -99,7 +99,16 @@ export default function TrituxProject() {
               ))}
             </div>
 
-           
+            <h4 className="text-fg text-sm font-medium mb-3 mt-6">Demo</h4>
+            <div className="aspect-video rounded-xl overflow-hidden border border-line">
+              <iframe
+                src="https://www.youtube.com/embed/Af9Ds7O2360"
+                title="Tritux Group — AI Assistant demo"
+                className="w-full h-full"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            </div>
           </motion.div>
         </div>
       </div>
