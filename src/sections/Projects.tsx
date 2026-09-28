@@ -1,19 +1,23 @@
 import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
-import { projects, type Project } from "@/data/profile";
-import ProjectCard from "@/components/ProjectCard";
+import ProjectCase from "@/components/ProjectCase";
 import ProjectModal from "@/components/ProjectModal";
+import { useT } from "@/i18n/ui";
+import { useContent } from "@/i18n/content";
 
 const CATEGORIES = ["All", "Generative AI", "AI", "Computer Vision", "Full-Stack", "Mobile"] as const;
 
 export default function Projects() {
+  const t = useT();
+  const { projects } = useContent();
   const [filter, setFilter] = useState<(typeof CATEGORIES)[number]>("All");
-  const [active, setActive] = useState<Project | null>(null);
+  const [activeId, setActiveId] = useState<string | null>(null);
 
   const filtered = useMemo(
     () => (filter === "All" ? projects : projects.filter((p) => p.category === filter)),
-    [filter]
+    [filter, projects]
   );
+  const active = projects.find((p) => p.id === activeId) ?? null;
 
   return (
     <section id="projects" className="relative py-28 md:py-36 bg-panel/40">
@@ -25,34 +29,32 @@ export default function Projects() {
           transition={{ duration: 0.6 }}
           className="mb-10 max-w-xl"
         >
-          <span className="text-azure text-sm font-medium">Projects</span>
-          <h2 className="font-display font-bold text-3xl sm:text-4xl text-fg mt-3">Selected work</h2>
+          <span className="font-mono text-azure text-xs tracking-[0.2em] uppercase">{t("projects.kicker")}</span>
+          <h2 className="font-display font-bold text-3xl sm:text-4xl text-fg mt-3">{t("projects.title")}</h2>
         </motion.div>
 
-        <div className="flex gap-2 overflow-x-auto scrollbar-thin pb-2 mb-10 -mx-1 px-1">
+        <div className="flex flex-wrap gap-x-6 gap-y-2 mb-4 border-b border-line pb-6">
           {CATEGORIES.map((cat) => (
             <button
               key={cat}
               onClick={() => setFilter(cat)}
-              className={`shrink-0 px-4 py-2 rounded-full text-sm border transition-colors focus-ring ${
-                filter === cat
-                  ? "bg-azure text-white border-azure"
-                  : "border-line text-muted hover:text-fg hover:border-azure/40"
+              className={`font-mono text-xs tracking-wider uppercase pb-1 border-b transition-colors focus-ring ${
+                filter === cat ? "text-fg border-azure" : "text-muted border-transparent hover:text-fg"
               }`}
             >
-              {cat}
+              {t("cat." + cat)}
             </button>
           ))}
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div>
           {filtered.map((project, i) => (
-            <ProjectCard key={project.id} project={project} index={i} onOpen={() => setActive(project)} />
+            <ProjectCase key={project.id} project={project} index={i} onOpen={() => setActiveId(project.id)} />
           ))}
         </div>
       </div>
 
-      <ProjectModal project={active} onClose={() => setActive(null)} />
+      <ProjectModal project={active} onClose={() => setActiveId(null)} />
     </section>
   );
 }

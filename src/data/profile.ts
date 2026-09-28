@@ -132,19 +132,6 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    id: "coding-factory",
-    name: "Coding Factory — Adaptive E-learning",
-    description:
-      "An e-learning platform built with Angular and Spring Boot, with an NLP sentiment-analysis system to process student complaints and feedback, plus a recommendation system that adapts content and courses to each student's profile and level test.",
-    technologies: ["Angular", "Spring Boot", "NLP"],
-    category: "Full-Stack",
-    features: [
-      "Sentiment analysis on student feedback and complaints",
-      "Content recommendation adapted to student profile and level",
-    ],
-     images: ["/assets/s1.PNG", "/assets/s3.PNG","/assets/s4.PNG","/assets/s6.PNG"],
-  },
-    {
     id: "outfit-recommender",
     name: "AI Outfit Recommendation Platform",
     description:
@@ -157,6 +144,21 @@ export const projects: Project[] = [
     ],
     images: ["/assets/m1.PNG", "/assets/m2.PNG","/assets/m3.PNG","/assets/m4.PNG","/assets/m5.PNG"],
   },
+  {
+    
+    id: "coding-factory",
+    name: "Coding Factory — Adaptive E-learning",
+    description:
+      "An e-learning platform built with Angular and Spring Boot, with an NLP sentiment-analysis system to process student complaints and feedback, plus a recommendation system that adapts content and courses to each student's profile and level test.",
+    technologies: ["Angular", "Spring Boot", "NLP"],
+    category: "Full-Stack",
+    features: [
+      "Sentiment analysis on student feedback and complaints",
+      "Content recommendation adapted to student profile and level",
+    ],
+     images: ["/assets/s1.PNG", "/assets/s3.PNG","/assets/s4.PNG","/assets/s6.PNG"],
+  },
+    
   {
     id: "health-tracker",
     name: "Health Tracking Mobile App",

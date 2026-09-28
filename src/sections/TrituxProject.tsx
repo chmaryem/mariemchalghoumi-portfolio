@@ -1,10 +1,12 @@
 import { motion } from "framer-motion";
-import { pipeline } from "@/data/pipeline";
-import { experiences } from "@/data/profile";
-
-const featured = experiences.find((e) => e.featured)!;
+import { useT } from "@/i18n/ui";
+import { useContent } from "@/i18n/content";
 
 export default function TrituxProject() {
+  const t = useT();
+  const { experiences, pipeline } = useContent();
+  const featured = experiences.find((e) => e.featured)!;
+
   return (
     <section className="relative py-28 md:py-36 bg-ink overflow-hidden">
       <div
@@ -24,9 +26,9 @@ export default function TrituxProject() {
           transition={{ duration: 0.6 }}
           className="max-w-2xl mb-16"
         >
-          <span className="text-azure text-sm font-medium">Graduation Project · Tritux Group</span>
+          <span className="font-mono text-azure text-xs tracking-[0.2em] uppercase">{t("tritux.kicker")}</span>
           <h2 className="font-display font-bold text-3xl sm:text-4xl text-fg mt-3 mb-4">
-            AI Assistant for Code Optimization
+            {t("tritux.title")}
           </h2>
           <p className="text-muted leading-relaxed">
             {featured.description[0]} {featured.description[2]}
@@ -76,9 +78,9 @@ export default function TrituxProject() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.6 }}
-            className="rounded-2xl border border-line bg-surface/40 p-6 sm:p-8 h-fit lg:sticky lg:top-32"
+            className="rounded-lg border border-line bg-surface/40 p-6 sm:p-8 h-fit lg:sticky lg:top-32"
           >
-            <h3 className="font-display font-semibold text-fg mb-4">What it does</h3>
+            <h3 className="font-display font-semibold text-fg mb-4">{t("tritux.whatItDoes")}</h3>
             <ul className="space-y-3 mb-6">
               {featured.description.map((line, i) => (
                 <li key={i} className="text-muted text-sm leading-relaxed flex gap-2">
@@ -87,7 +89,7 @@ export default function TrituxProject() {
                 </li>
               ))}
             </ul>
-            <h4 className="text-fg text-sm font-medium mb-3">Technologies</h4>
+            <h4 className="text-fg text-sm font-medium mb-3">{t("tritux.tech")}</h4>
             <div className="flex flex-wrap gap-2">
               {featured.technologies.map((tech) => (
                 <span
@@ -99,11 +101,11 @@ export default function TrituxProject() {
               ))}
             </div>
 
-            <h4 className="text-fg text-sm font-medium mb-3 mt-6">Demo</h4>
+            <h4 className="text-fg text-sm font-medium mb-3 mt-6">{t("tritux.demo")}</h4>
             <div className="aspect-video rounded-xl overflow-hidden border border-line">
               <iframe
                 src="https://www.youtube.com/embed/Af9Ds7O2360"
-                title="Tritux Group — AI Assistant demo"
+                title={t("tritux.demoTitle")}
                 className="w-full h-full"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen

@@ -1,7 +1,9 @@
 import { Github, Linkedin, Mail } from "lucide-react";
 import { profile } from "@/data/profile";
+import { useT } from "@/i18n/ui";
 
 export default function Footer() {
+  const t = useT();
   const year = new Date().getFullYear();
 
   return (
@@ -9,7 +11,7 @@ export default function Footer() {
       <div className="container-xl py-10 flex flex-col sm:flex-row items-center justify-between gap-6">
         <div className="text-center sm:text-left">
           <p className="font-display font-semibold text-fg">{profile.name}</p>
-          <p className="text-muted text-sm">Software Engineer • AI • Full-Stack</p>
+          <p className="text-muted text-sm">{t("footer.tagline")}</p>
         </div>
 
         <div className="flex items-center gap-5 text-muted">

@@ -1,7 +1,10 @@
 import { motion } from "framer-motion";
-import { skillGroups } from "@/data/profile";
+import { useT } from "@/i18n/ui";
+import { useContent } from "@/i18n/content";
 
 export default function Skills() {
+  const t = useT();
+  const { skillGroups } = useContent();
   return (
     <section id="skills" className="relative py-28 md:py-36 bg-ink">
       <div className="container-xl">
@@ -10,33 +13,28 @@ export default function Skills() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6 }}
-          className="mb-14 max-w-xl"
+          className="mb-16 max-w-xl"
         >
-          <span className="text-azure text-sm font-medium">Skills</span>
-          <h2 className="font-display font-bold text-3xl sm:text-4xl text-fg mt-3">Technical toolkit</h2>
+          <span className="font-mono text-azure text-xs tracking-[0.2em] uppercase">{t("skills.kicker")}</span>
+          <h2 className="font-display font-bold text-3xl sm:text-4xl text-fg mt-3">{t("skills.title")}</h2>
         </motion.div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="divide-y divide-line border-t border-line">
           {skillGroups.map((group, i) => (
             <motion.div
               key={group.category}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
-              transition={{ duration: 0.5, delay: (i % 3) * 0.07 }}
-              className="rounded-2xl border border-line bg-surface/40 p-6 hover:border-azure/30 transition-colors"
+              transition={{ duration: 0.5, delay: i * 0.04 }}
+              className="grid sm:grid-cols-[220px_1fr] gap-2 sm:gap-8 py-7"
             >
-              <h3 className="font-display font-semibold text-fg text-sm mb-4">{group.category}</h3>
-              <div className="flex flex-wrap gap-2">
-                {group.skills.map((skill) => (
-                  <span
-                    key={skill}
-                    className="text-xs px-2.5 py-1.5 rounded-full border border-line bg-white/[0.02] text-muted hover:text-fg hover:border-azure/40 transition-colors"
-                  >
-                    {skill}
-                  </span>
-                ))}
-              </div>
+              <h3 className="font-mono text-xs tracking-[0.2em] uppercase text-muted">
+                {group.category}
+              </h3>
+              <p className="text-fg text-base sm:text-lg leading-relaxed">
+                {group.skills.join(" · ")}
+              </p>
             </motion.div>
           ))}
         </div>

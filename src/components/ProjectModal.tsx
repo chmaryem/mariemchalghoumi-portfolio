@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
 import type { Project } from "@/data/profile";
 import ProjectVisual from "@/components/ProjectVisual";
+import { useT } from "@/i18n/ui";
 
 interface Props {
   project: Project | null;
@@ -10,6 +11,7 @@ interface Props {
 }
 
 export default function ProjectModal({ project, onClose }: Props) {
+  const t = useT();
   const [activeImage, setActiveImage] = useState(0);
 
   useEffect(() => {
@@ -54,14 +56,14 @@ export default function ProjectModal({ project, onClose }: Props) {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 16, scale: 0.98 }}
             transition={{ duration: 0.3, ease: "easeOut" }}
-            className="relative w-full max-w-3xl max-h-[92vh] overflow-y-auto rounded-2xl border border-line bg-panel"
+            className="relative w-full max-w-3xl max-h-[92vh] overflow-y-auto rounded-lg border border-line bg-panel"
           >
             {/* Main image / visual — shown in full, never cropped */}
             <div className="h-72 sm:h-[26rem] border-b border-line bg-ink flex items-center justify-center overflow-hidden">
               {images[activeImage] ? (
                 <img
                   src={images[activeImage]}
-                  alt={`${project.name} — screenshot ${activeImage + 1}`}
+                  alt={t("modal.shotAlt", { name: project.name, n: activeImage + 1 })}
                   className="w-full h-full object-contain"
                 />
               ) : (
@@ -71,14 +73,14 @@ export default function ProjectModal({ project, onClose }: Props) {
 
             <button
               onClick={onClose}
-              aria-label="Close"
+              aria-label={t("modal.close")}
               className="absolute top-4 right-4 p-2 rounded-full bg-ink/70 text-fg hover:bg-ink transition-colors focus-ring"
             >
               <X size={18} />
             </button>
 
             <div className="p-6 sm:p-10">
-              <span className="text-azure text-xs font-medium uppercase tracking-wide">{project.category}</span>
+              <span className="text-azure text-xs font-medium uppercase tracking-wide">{t("cat." + project.category)}</span>
               <h3 id="project-modal-title" className="font-display font-bold text-2xl sm:text-3xl text-fg mt-2 mb-4">
                 {project.name}
               </h3>
@@ -90,7 +92,7 @@ export default function ProjectModal({ project, onClose }: Props) {
                     <button
                       key={src}
                       onClick={() => setActiveImage(i)}
-                      aria-label={`Show screenshot ${i + 1}`}
+                      aria-label={t("modal.showShot", { n: i + 1 })}
                       aria-current={activeImage === i}
                       className={`h-20 w-32 shrink-0 rounded-lg overflow-hidden border-2 transition-colors focus-ring ${
                         activeImage === i ? "border-azure" : "border-line hover:border-azure/40"
@@ -102,7 +104,7 @@ export default function ProjectModal({ project, onClose }: Props) {
                 </div>
               )}
 
-              <h4 className="text-fg text-sm font-medium mb-2">Key features</h4>
+              <h4 className="text-fg text-sm font-medium mb-2">{t("modal.keyFeatures")}</h4>
               <ul className="space-y-1.5 mb-6">
                 {project.features.map((f) => (
                   <li key={f} className="text-muted text-sm flex gap-2">
@@ -112,7 +114,7 @@ export default function ProjectModal({ project, onClose }: Props) {
                 ))}
               </ul>
 
-              <h4 className="text-fg text-sm font-medium mb-2">Technologies</h4>
+              <h4 className="text-fg text-sm font-medium mb-2">{t("modal.tech")}</h4>
               <div className="flex flex-wrap gap-2">
                 {project.technologies.map((t) => (
                   <span key={t} className="text-xs px-2.5 py-1 rounded-full border border-line text-muted">

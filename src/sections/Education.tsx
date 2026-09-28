@@ -1,8 +1,10 @@
 import { motion } from "framer-motion";
-import { GraduationCap } from "lucide-react";
-import { education } from "@/data/profile";
+import { useT } from "@/i18n/ui";
+import { useContent } from "@/i18n/content";
 
 export default function Education() {
+  const t = useT();
+  const { education } = useContent();
   return (
     <section id="education" className="relative py-28 md:py-36 bg-ink">
       <div className="container-xl">
@@ -11,28 +13,29 @@ export default function Education() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6 }}
-          className="mb-14 max-w-xl"
+          className="mb-16 max-w-xl"
         >
-          <span className="text-azure text-sm font-medium">Education</span>
-          <h2 className="font-display font-bold text-3xl sm:text-4xl text-fg mt-3">Academic path</h2>
+          <span className="font-mono text-azure text-xs tracking-[0.2em] uppercase">{t("edu.kicker")}</span>
+          <h2 className="font-display font-bold text-3xl sm:text-4xl text-fg mt-3">{t("edu.title")}</h2>
         </motion.div>
 
-        <div className="grid sm:grid-cols-3 gap-5">
+        <div className="divide-y divide-line border-t border-line">
           {education.map((item, i) => (
             <motion.div
               key={item.degree}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
-              transition={{ duration: 0.5, delay: i * 0.08 }}
-              className="rounded-2xl border border-line bg-surface/40 p-6 hover:border-azure/30 transition-colors"
+              transition={{ duration: 0.5, delay: i * 0.06 }}
+              className="grid sm:grid-cols-[140px_1fr] gap-2 sm:gap-8 py-7 items-baseline"
             >
-              <div className="h-10 w-10 rounded-full bg-azure/10 flex items-center justify-center mb-4">
-                <GraduationCap size={18} className="text-azure" />
+              <p className="font-mono text-xs text-muted tracking-wider">{item.date}</p>
+              <div>
+                <h3 className="font-display font-semibold text-fg text-base sm:text-lg leading-snug">
+                  {item.degree}
+                </h3>
+                <p className="text-muted text-sm mt-1">{item.school}</p>
               </div>
-              <p className="text-muted text-xs mb-2">{item.date}</p>
-              <h3 className="font-display font-semibold text-fg text-base leading-snug mb-1">{item.degree}</h3>
-              <p className="text-muted text-sm">{item.school}</p>
             </motion.div>
           ))}
         </div>

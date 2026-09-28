@@ -16,6 +16,8 @@ export default {
       fontFamily: {
         display: ["'Plus Jakarta Sans'", "Inter", "sans-serif"],
         body: ["Inter", "sans-serif"],
+        script: ["Caveat", "cursive"],
+        mono: ["'JetBrains Mono'", "ui-monospace", "monospace"],
       },
       maxWidth: {
         prose: "72ch",

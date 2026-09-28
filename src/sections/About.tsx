@@ -1,7 +1,10 @@
 import { motion } from "framer-motion";
-import { aboutStory } from "@/data/profile";
+import { useT } from "@/i18n/ui";
+import { useContent } from "@/i18n/content";
 
 export default function About() {
+  const t = useT();
+  const { aboutStory } = useContent();
   return (
     <section id="about" className="relative py-28 md:py-36 bg-ink">
       <div className="container-xl grid md:grid-cols-[1fr_1.4fr] gap-12 md:gap-16">
@@ -12,20 +15,17 @@ export default function About() {
           transition={{ duration: 0.6 }}
           className="md:sticky md:top-32 md:self-start"
         >
-          <span className="text-azure text-sm font-medium">About</span>
+          <span className="font-mono text-azure text-xs tracking-[0.2em] uppercase">{t("about.kicker")}</span>
           <h2 className="font-display font-bold text-3xl sm:text-4xl text-fg mt-3 mb-5 leading-tight">
-            Building software.
+            {t("about.h1")}
             <br />
-            Exploring intelligence.
+            {t("about.h2")}
           </h2>
           <p className="text-muted leading-relaxed max-w-sm">
-            A full-stack path that grew, year over year, into an interest in
-            making software systems genuinely intelligent — not by chasing
-            trends, but by shipping projects that use AI where it earns its
-            place.
+            {t("about.text")}
           </p>
 
-          <div className="mt-8 overflow-hidden rounded-2xl border border-line max-w-[220px]">
+          <div className="mt-8 overflow-hidden rounded-lg border border-line max-w-[220px]">
             <img
               src="/assets/profile.png"
               alt="Mariem Chalghoumi"

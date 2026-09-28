@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
+import { useT } from "@/i18n/ui";
 
 export default function PersonalBrand() {
+  const t = useT();
   return (
     <section className="relative py-28 md:py-36 bg-panel/40 overflow-hidden">
       <div className="container-xl grid md:grid-cols-2 gap-12 items-center">
@@ -11,7 +13,7 @@ export default function PersonalBrand() {
           transition={{ duration: 0.7 }}
           className="relative order-2 md:order-1"
         >
-          <div className="relative rounded-3xl overflow-hidden border border-line max-w-sm mx-auto md:mx-0">
+          <div className="relative rounded-lg overflow-hidden border border-line max-w-sm mx-auto md:mx-0">
             <img
               src="/assets/profile.png"
               alt="Mariem Chalghoumi, software engineer"
@@ -40,10 +42,9 @@ export default function PersonalBrand() {
           transition={{ duration: 0.7, delay: 0.1 }}
           className="order-1 md:order-2"
         >
-          <span className="text-azure text-sm font-medium">Software Engineer with an AI mindset</span>
+          <span className="font-mono text-azure text-xs tracking-[0.2em] uppercase">{t("brand.kicker")}</span>
           <p className="font-display font-semibold text-2xl sm:text-3xl text-fg leading-snug mt-4">
-            Building software is not only about writing code. It's about
-            designing systems that solve real problems.
+            {t("brand.quote")}
           </p>
         </motion.div>
       </div>

@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-import { interests } from "@/data/profile";
+import { useT } from "@/i18n/ui";
+import { useContent } from "@/i18n/content";
 
 // Node positions on a 0-100 viewBox grid, describing the knowledge graph
 // LLM -> Generative AI -> {RAG, Agents} -> {Knowledge Graph, Tools} -> AI Software Engineering
@@ -28,6 +29,8 @@ function nodeById(id: string) {
 }
 
 export default function Interests() {
+  const t = useT();
+  const { interests } = useContent();
   return (
     <section className="relative py-28 md:py-36 bg-panel/40 overflow-hidden">
       <div className="container-xl grid lg:grid-cols-2 gap-12 items-center">
@@ -37,25 +40,18 @@ export default function Interests() {
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6 }}
         >
-          <span className="text-azure text-sm font-medium">What I'm exploring</span>
+          <span className="font-mono text-azure text-xs tracking-[0.2em] uppercase">
+            {t("interests.kicker")}
+          </span>
           <h2 className="font-display font-bold text-3xl sm:text-4xl text-fg mt-3 mb-5">
-            Where software meets intelligence
+            {t("interests.title")}
           </h2>
           <p className="text-muted leading-relaxed max-w-md mb-8">
-            The thread connecting my recent projects: using generative AI and
-            multi-agent architectures as real components of a system, not
-            just an add-on.
+            {t("interests.text")}
           </p>
-          <ul className="grid grid-cols-2 gap-3">
-            {interests.map((topic) => (
-              <li
-                key={topic}
-                className="text-sm text-muted border border-line rounded-lg px-3 py-2.5 bg-white/[0.02]"
-              >
-                {topic}
-              </li>
-            ))}
-          </ul>
+          <p className="text-fg/90 text-base leading-relaxed border-t border-line pt-6">
+            {interests.join(" · ")}
+          </p>
         </motion.div>
 
         <motion.div
@@ -111,7 +107,7 @@ export default function Interests() {
                   fontFamily="Inter, sans-serif"
                   opacity={0.85}
                 >
-                  {n.label}
+                  {t("graph." + n.id)}
                 </text>
               </g>
             ))}
