@@ -20,7 +20,7 @@ const en: Dict = {
   "intro.tagline": "AI · Generative AI · Full-Stack · Computer Vision",
   "intro.enter": "Enter portfolio",
 
-  "hero.kicker": "Software Engineer — Portfolio",
+  "hero.kicker": "Software Engineer",
   "hero.viewWork": "View my work",
   "hero.downloadCv": "Download CV",
   "hero.scrollAbout": "Scroll to about section",

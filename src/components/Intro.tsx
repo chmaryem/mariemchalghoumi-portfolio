@@ -253,7 +253,7 @@ export default function CreativeIntro({ onReveal, onDone }: Props) {
           animate={exiting ? { opacity: 0, y: -24, x: -30 } : { opacity: 1, y: 0, x: 0 }}
           transition={exiting ? exitT : { delay: d(0.5), duration: 0.7 }}
         >
-          <span className="text-azure">01</span> / {t("intro.title")}
+          <span className="text-azure"></span>  {t("intro.title")}
         </motion.span>
         <motion.span
           initial={{ opacity: 0, y: -6 }}
