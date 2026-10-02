@@ -91,12 +91,12 @@ export default function Interests() {
                   r={n.id === "swe" ? 3.4 : 2.6}
                   fill={n.id === "swe" ? "#3D7FFF" : "#0E1424"}
                   stroke="#3D7FFF"
+                  style={{ transformOrigin: `${n.x}px ${n.y}px` }}
                   strokeWidth={0.5}
                   initial={{ scale: 0, opacity: 0 }}
                   whileInView={{ scale: 1, opacity: 1 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.4, delay: i * 0.1 }}
-                  style={{ transformOrigin: `${n.x}px ${n.y}px` }}
                 />
                 <text
                   x={n.x}

@@ -78,7 +78,13 @@ function IntroCursor({ hovering, label }: { hovering: boolean; label: string }) 
   );
 }
 
-
+/**
+ * Cinematic opening. Choreography: the light breathes in, technical marks
+ * appear, the name resolves letter by letter while a line of light crosses the
+ * frame, the portrait comes into focus, then the title and specialisations.
+ * The intro does not fade out: the name and portrait lift away, the light
+ * expands and the hero emerges from underneath.
+ */
 export default function CreativeIntro({ onReveal, onDone }: Props) {
   const t = useT();
   const { lang } = useLang();
@@ -210,7 +216,7 @@ export default function CreativeIntro({ onReveal, onDone }: Props) {
             animate={{ opacity: 1, rotate: 0 }}
             transition={{ delay: d(p.dl), duration: 0.8 }}
           >
-           
+            +
           </motion.span>
         ))}
         <motion.div
@@ -253,7 +259,7 @@ export default function CreativeIntro({ onReveal, onDone }: Props) {
           animate={exiting ? { opacity: 0, y: -24, x: -30 } : { opacity: 1, y: 0, x: 0 }}
           transition={exiting ? exitT : { delay: d(0.5), duration: 0.7 }}
         >
-          <span className="text-azure"></span>  {t("intro.title")}
+          <span className="text-azure"></span> {t("intro.title")}
         </motion.span>
         <motion.span
           initial={{ opacity: 0, y: -6 }}

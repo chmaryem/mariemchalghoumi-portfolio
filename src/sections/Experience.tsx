@@ -1,14 +1,32 @@
 import { motion } from "framer-motion";
-import { MapPin } from "lucide-react";
+import { Calendar } from "lucide-react";
 import { useT } from "@/i18n/ui";
 import { useContent } from "@/i18n/content";
+
+const RING_GRADIENTS = [
+  "conic-gradient(from 0deg, #3D7FFF, #7C6CF2, #3D7FFF)",
+  "conic-gradient(from 0deg, #7C6CF2, #5ecfc0, #7C6CF2)",
+  "conic-gradient(from 0deg, #5ecfc0, #3D7FFF, #5ecfc0)",
+];
+const TAG_COLORS = [
+  "text-azure bg-azure/10 border-azure/25",
+  "text-violet bg-violet/10 border-violet/25",
+  "text-[#5ecfc0] bg-[#5ecfc0]/10 border-[#5ecfc0]/25",
+];
 
 export default function Experience() {
   const t = useT();
   const { experiences } = useContent();
+
   return (
-    <section id="experience" className="relative py-28 md:py-36 bg-panel/40">
-      <div className="container-xl">
+    <section id="experience" className="relative py-28 md:py-40 bg-panel/40 overflow-hidden">
+      <div
+        className="pointer-events-none absolute inset-0 opacity-20"
+        style={{ background: "radial-gradient(ellipse 45% 35% at 10% 90%, rgba(124,108,242,0.2), transparent 70%)" }}
+        aria-hidden="true"
+      />
+
+      <div className="container-xl relative">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -17,56 +35,64 @@ export default function Experience() {
           className="mb-16 max-w-xl"
         >
           <span className="font-mono text-azure text-xs tracking-[0.2em] uppercase">{t("exp.kicker")}</span>
-          <h2 className="font-display font-bold text-3xl sm:text-4xl text-fg mt-3">
-            {t("exp.title")}
-          </h2>
+          <h2 className="font-display font-bold text-3xl sm:text-4xl text-fg mt-3">{t("exp.title")}</h2>
         </motion.div>
 
-        <div className="divide-y divide-line border-t border-line">
-          {experiences.map((exp, i) => (
-            <motion.article
-              key={exp.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.5, delay: (i % 3) * 0.06 }}
-              className={`grid sm:grid-cols-[160px_1fr] gap-2 sm:gap-8 py-10 relative ${
-                exp.featured ? "pl-4 -ml-4 border-l-2 border-azure sm:border-l-0 sm:pl-0 sm:ml-0" : ""
-              }`}
-            >
-              <div>
-                <p className="font-mono text-xs text-muted tracking-wider">{exp.date}</p>
-                {exp.location && (
-                  <p className="text-muted text-xs flex items-center gap-1 mt-2">
-                    <MapPin size={11} /> {exp.location}
-                  </p>
-                )}
-                {exp.featured && (
-                  <p className="font-mono text-[10px] text-azure tracking-[0.2em] uppercase mt-2">
-                    {t("exp.featured")}
-                  </p>
-                )}
-              </div>
+        <div className="relative">
+          <div className="absolute left-[23px] top-3 bottom-3 w-px bg-gradient-to-b from-azure/40 via-violet/30 to-transparent hidden sm:block" />
 
-              <div>
-                <h3 className="font-display font-semibold text-lg sm:text-xl text-fg">{exp.role}</h3>
-                <p className="text-azure text-sm font-medium mt-0.5 mb-4">{exp.company}</p>
+          <div className="space-y-6">
+            {experiences.map((exp, i) => (
+              <motion.article
+                key={exp.id}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.55, delay: (i % 4) * 0.06 }}
+                whileHover={{ y: -3 }}
+                className="relative sm:pl-16 rounded-2xl border border-line bg-surface/40 hover:border-azure/30 transition-colors p-6 sm:p-7"
+              >
+                <div
+                  className="hidden sm:flex absolute left-0 top-6 h-12 w-12 rounded-full items-center justify-center"
+                  style={{ background: RING_GRADIENTS[i % RING_GRADIENTS.length] }}
+                  aria-hidden="true"
+                >
+                  <div className="h-[calc(100%-3px)] w-[calc(100%-3px)] rounded-full bg-panel flex items-center justify-center">
+                    <Calendar size={16} className="text-fg" />
+                  </div>
+                </div>
 
-                <ul className="space-y-1.5 mb-4 max-w-xl">
-                  {exp.description.map((line, idx) => (
-                    <li key={idx} className="text-muted text-sm sm:text-[15px] leading-relaxed flex gap-2">
-                      <span className="text-azure/60 mt-2 h-1 w-1 rounded-full bg-current shrink-0" />
-                      <span>{line}</span>
-                    </li>
-                  ))}
-                </ul>
+                <div className="flex flex-wrap items-center gap-3 mb-2">
+                  <span className="font-mono text-xs text-muted tracking-wider">{exp.date}</span>
+                  {exp.featured && (
+                    <span className="text-[10px] font-medium px-2.5 py-1 rounded-full border border-azure/30 text-azure bg-azure/10 tracking-wide uppercase">
+                      {t("exp.featured")}
+                    </span>
+                  )}
+                </div>
 
-                <p className="font-mono text-xs text-muted/80 tracking-wide">
-                  {exp.technologies.join(" · ")}
+                <h3 className="font-display font-semibold text-xl sm:text-2xl text-fg leading-snug">
+                  {exp.role}
+                </h3>
+                <p className="text-sm font-medium mt-1 mb-4 text-gradient inline-block">{exp.company}</p>
+
+                <p className="text-muted text-sm sm:text-[15px] leading-relaxed max-w-xl mb-5">
+                  {exp.description.join(" ")}
                 </p>
-              </div>
-            </motion.article>
-          ))}
+
+                <div className="flex flex-wrap gap-1.5">
+                  {exp.technologies.map((tech, ti) => (
+                    <span
+                      key={tech}
+                      className={`text-[11px] font-medium px-2.5 py-1 rounded-full border ${TAG_COLORS[ti % TAG_COLORS.length]}`}
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </motion.article>
+            ))}
+          </div>
         </div>
       </div>
     </section>

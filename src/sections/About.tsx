@@ -1,67 +1,111 @@
+// OPTION B — "Editorial split": full-bleed portrait on one side (like the
+// Hero's visual language but static, no ring), large pull-quote style
+// statement on the other. More magazine-like, less "dashboard panel".
 import { motion } from "framer-motion";
 import { useT } from "@/i18n/ui";
 import { useContent } from "@/i18n/content";
+import { useLang } from "@/i18n/LanguageContext";
 
-export default function About() {
+// Self-contained bilingual labels for this block — not routed through
+// ui.ts, so this section never depends on that dictionary being in sync.
+const LABELS = {
+  en: { basedIn: "Based in", focus: "Focus", focusValue: "Software × AI", currently: "Currently", location: "Tunisia" },
+  fr: { basedIn: "Basée en", focus: "Focus", focusValue: "Logiciel × IA", currently: "Actuellement", location: "Tunisie" },
+};
+
+export default function AboutOptionB() {
   const t = useT();
+  const { lang } = useLang();
+  const l = LABELS[lang];
   const { aboutStory } = useContent();
-  return (
-    <section id="about" className="relative py-28 md:py-36 bg-ink">
-      <div className="container-xl grid md:grid-cols-[1fr_1.4fr] gap-12 md:gap-16">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.6 }}
-          className="md:sticky md:top-32 md:self-start"
-        >
-          <span className="font-mono text-azure text-xs tracking-[0.2em] uppercase">{t("about.kicker")}</span>
-          <h2 className="font-display font-bold text-3xl sm:text-4xl text-fg mt-3 mb-5 leading-tight">
-            {t("about.h1")}
-            <br />
-            {t("about.h2")}
-          </h2>
-          <p className="text-muted leading-relaxed max-w-sm">
-            {t("about.text")}
-          </p>
+  const current = aboutStory[aboutStory.length - 1];
 
-          <div className="mt-8 overflow-hidden rounded-lg border border-line max-w-[220px]">
-            <img
-              src="/assets/profile.png"
-              alt="Mariem Chalghoumi"
-              className="w-full h-full object-cover"
-              style={{ aspectRatio: "3/4", objectPosition: "50% 15%" }}
-            />
-          </div>
+  return (
+    <section id="about" className="relative py-28 md:py-0 bg-ink">
+      <div className="grid md:grid-cols-2 md:min-h-[90vh]">
+        <motion.div
+          initial={{ opacity: 0, scale: 1.03 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+          className="relative order-2 md:order-1 h-[50vh] md:h-auto"
+        >
+          <img
+            src="/assets/profile.png"
+            alt="Mariem Chalghoumi"
+            className="absolute inset-0 w-full h-full object-cover"
+            style={{ objectPosition: "50% 12%" }}
+            draggable={false}
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-ink via-transparent to-ink/20 md:bg-gradient-to-r md:from-transparent md:via-transparent md:to-ink/10" />
         </motion.div>
 
-        <div className="relative pl-8 md:pl-10">
-          <div className="absolute left-[7px] md:left-[7px] top-2 bottom-2 w-px bg-line" />
-          <motion.div
-            initial={{ scaleY: 0 }}
-            whileInView={{ scaleY: 1 }}
+        <div className="order-1 md:order-2 flex flex-col justify-center px-6 sm:px-12 md:px-16 py-16 md:py-0">
+          <motion.span
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
             viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 1.2, ease: "easeInOut" }}
-            style={{ originY: 0 }}
-            className="absolute left-[7px] top-2 bottom-2 w-px bg-gradient-to-b from-azure via-violet to-transparent"
-          />
+            transition={{ duration: 0.6 }}
+            className="font-mono text-azure text-xs tracking-[0.2em] uppercase block mb-6"
+          >
+            {t("about.kicker")}
+          </motion.span>
 
-          <ol className="space-y-10">
-            {aboutStory.map((step, i) => (
-              <motion.li
-                key={step.label}
-                initial={{ opacity: 0, x: 16 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.5, delay: i * 0.08 }}
-                className="relative"
-              >
-                <span className="absolute -left-8 md:-left-10 top-1.5 h-3.5 w-3.5 rounded-full bg-ink border-2 border-azure" />
-                <h3 className="font-display font-semibold text-lg text-fg mb-1">{step.label}</h3>
-                <p className="text-muted text-sm sm:text-base leading-relaxed max-w-lg">{step.detail}</p>
-              </motion.li>
+          <motion.blockquote
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            className="font-display font-semibold text-fg leading-tight text-3xl sm:text-4xl lg:text-5xl max-w-lg"
+          >
+            {t("about.h1")} {t("about.h2")}
+          </motion.blockquote>
+
+          <motion.p
+            initial={{ opacity: 0, y: 14 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.6, delay: 0.15 }}
+            className="text-muted leading-relaxed max-w-md mt-8"
+          >
+            {t("about.text")}
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="mt-10 pt-8 border-t border-line max-w-md space-y-3"
+          >
+            <p className="text-sm text-fg">
+              <span className="font-mono text-[11px] text-muted mr-3">{l.basedIn}</span>
+              {l.location}
+            </p>
+            <p className="text-sm text-fg">
+              <span className="font-mono text-[11px] text-muted mr-3">{l.focus}</span>
+              {l.focusValue}
+            </p>
+            <p className="text-sm text-fg leading-relaxed">
+              <span className="font-mono text-[11px] text-muted mr-3 block mb-1">{l.currently}</span>
+              {current.detail}
+            </p>
+          </motion.div>
+
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.7, delay: 0.4 }}
+            className="mt-8 font-mono text-[11px] text-muted/70 tracking-wide leading-relaxed max-w-md"
+          >
+            {aboutStory.map((s, i) => (
+              <span key={s.label}>
+                {s.label}
+                {i < aboutStory.length - 1 && <span className="text-azure/60 mx-2">→</span>}
+              </span>
             ))}
-          </ol>
+          </motion.p>
         </div>
       </div>
     </section>

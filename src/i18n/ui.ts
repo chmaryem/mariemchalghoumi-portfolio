@@ -20,12 +20,17 @@ const en: Dict = {
   "intro.tagline": "AI · Generative AI · Full-Stack · Computer Vision",
   "intro.enter": "Enter portfolio",
 
-  "hero.kicker": "Software Engineer",
+  "hero.kicker": "Software Engineer — Portfolio",
+  "hero.available": "Open to opportunities",
+  "hero.graduating": "Graduating",
+  "hero.projects": "Projects",
+  "hero.experiences": "Experiences",
+  "hero.focus": "Software × AI",
   "hero.viewWork": "View my work",
   "hero.downloadCv": "Download CV",
   "hero.scrollAbout": "Scroll to about section",
 
-  "about.kicker": "01 — About",
+  "about.kicker": "About",
   "about.h1": "Building software.",
   "about.h2": "Exploring intelligence.",
   "about.text":
@@ -60,6 +65,7 @@ const en: Dict = {
 
   "skills.kicker": "03 — Skills",
   "skills.title": "Technical toolkit",
+  "skills.manifesto": "I work across",
 
   "interests.kicker": "What I'm exploring",
   "interests.title": "Where software meets intelligence",
@@ -84,6 +90,8 @@ const en: Dict = {
   "contact.title": "Let's build something intelligent.",
   "contact.text":
     "I'm open to opportunities in software engineering, artificial intelligence, generative AI and innovative technology projects.",
+  "contact.sayHello": "Say hello",
+  "contact.cv": "CV",
 
   "footer.tagline": "Software Engineer • AI • Full-Stack",
 };
@@ -107,6 +115,11 @@ const fr: Dict = {
   "intro.enter": "Entrer dans le portfolio",
 
   "hero.kicker": "Ingénieure logiciel — Portfolio",
+  "hero.available": "Ouverte aux opportunités",
+  "hero.graduating": "Diplômée en",
+  "hero.projects": "Projets",
+  "hero.experiences": "Expériences",
+  "hero.focus": "Logiciel × IA",
   "hero.viewWork": "Voir mes projets",
   "hero.downloadCv": "Télécharger mon CV",
   "hero.scrollAbout": "Aller à la section À propos",
@@ -116,6 +129,12 @@ const fr: Dict = {
   "about.h2": "Explorer l'intelligence.",
   "about.text":
     "Un parcours full-stack devenu, d'année en année, un intérêt pour rendre les systèmes logiciels réellement intelligents — pas en suivant les modes, mais en livrant des projets qui utilisent l'IA là où elle apporte quelque chose.",
+  "about.basedIn": "Basée en",
+  "about.focus": "Focus",
+  "about.focusValue": "Logiciel × IA",
+  "about.currently": "Actuellement",
+  "about.evolution": "Parcours",
+  "about.locationValue": "Tunisie",
 
   "exp.kicker": "02 — Expérience",
   "exp.title": "Parcours professionnel",
@@ -146,6 +165,7 @@ const fr: Dict = {
 
   "skills.kicker": "03 — Compétences",
   "skills.title": "Boîte à outils technique",
+  "skills.manifesto": "Je travaille sur",
 
   "interests.kicker": "Ce que j'explore",
   "interests.title": "Là où le logiciel rencontre l'intelligence",
@@ -170,6 +190,8 @@ const fr: Dict = {
   "contact.title": "Construisons quelque chose d'intelligent.",
   "contact.text":
     "Je suis ouverte aux opportunités en ingénierie logicielle, intelligence artificielle, IA générative et projets technologiques innovants.",
+  "contact.sayHello": "Dire bonjour",
+  "contact.cv": "CV",
 
   "footer.tagline": "Ingénieure logiciel • IA • Full-Stack",
 };

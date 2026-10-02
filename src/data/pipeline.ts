@@ -3,9 +3,7 @@ export interface PipelineNode {
   detail: string;
 }
 
-// Mirrors the actual RAG / multi-agent architecture described in the CV
-// for the Tritux Group PFE: a VS Code assistant backed by a LangGraph
-// multi-agent RAG pipeline with reranking and a vulnerability knowledge graph.
+
 export const pipeline: PipelineNode[] = [
   { label: "Developer", detail: "Works in the editor and asks the assistant for help." },
   { label: "VS Code Extension", detail: "Captures the request and code context from the editor." },
